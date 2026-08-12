@@ -4,8 +4,12 @@ compatibility_flags = ["nodejs_compat"]
 main = ".open-next/worker.js"
 minify = true
 
+# 自定义域名配置（必须放在最顶层，不能放在 [vars] 下面）
+routes = [
+  { pattern = "tv.nshzswz.xyz", custom_domain = true }
+]
+
 # 静态资源配置
-# Cloudflare Workers Assets 用于服务静态文件
 [assets]
 directory = ".open-next/assets"
 binding = "ASSETS"
@@ -16,10 +20,7 @@ binding = "DB"
 database_name = "moontvplus"
 database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
 
+# 环境变量（必须放在文件的最后面，或者放在独立区间）
 [vars]
 NODE_ENV = "production"
 BUILD_TARGET = "cloudflare"
-
-routes = [
-  { pattern = "tv.nshzswz.xyz*", zone_name = "nshzswz.xyz" }
-]
